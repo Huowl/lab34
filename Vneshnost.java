@@ -1,11 +1,21 @@
 package lab34;
 
 public class Vneshnost extends Something implements material{
+	public String imya;
+	public Vneshnost(String imya){
+		this.imya = imya;
+	}
+	public String getname(){return imya;}
 	public static String Material(){
 		return "материальный(ые) ";
 	}
 	public static void vesh_v_vetrine (String vesh){
-		System.out.println("в ветрине находится" + Something.sushestvovanie() + Material() + vesh);
+		if (vesh == "грим" || vesh == "парики" || vesh == "накладные бороды и усы" || vesh == "маска на верхнюю часть лица" || vesh == "маска с прорезами для глаз" || vesh == "маска цельная"){
+			System.out.println("в ветрине находится" + Something.sushestvovanie() + Material() + vesh);
+		}
+		else {
+			throw new IsItCorrectException("вы ввели не тот тип вещи");
+		}
 	}
 	public static void maska(){
 		String type1 = "маска на верхнюю часть лица";
@@ -26,5 +36,9 @@ public class Vneshnost extends Something implements material{
 		maska_type2(String mudamuda){
 			Vneshnost.vesh_v_vetrine(mudamuda);
 		}
+	}
+	@Override
+	public String toString(){
+		return imya;
 	}
 }

@@ -4,10 +4,6 @@ public class Policeman extends pugalo{
 	enum Veshi { MEDNAYA_KASKA, DUBINKA }
 	Veshi vesh = Veshi.MEDNAYA_KASKA;
 	Veshi vesh1 = Veshi.DUBINKA;
-	String name = new String();
-	public void givename(String name) throws IsItExistException{
-		this.name = name;
-	}
 	Policeman(){
 		System.out.println(vesh.name() + " , " + vesh1.name() + " находятся на чучеле полицейского" + Something.sushestvovanie());
 		try{
