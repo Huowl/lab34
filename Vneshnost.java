@@ -41,4 +41,22 @@ public class Vneshnost extends Something implements material{
 	public String toString(){
 		return imya;
 	}
+	@Override 
+	public boolean equals(Object obj) {
+		Vneshnost other = (Vneshnost) obj;
+		boolean check = false;
+		if (this.imya.equals(other.imya) /*|| this.imya.equals(other.imya)*/) {
+			check = true;
+		}
+		return check;
+	}
+	@Override
+	public int hashCode(){
+		char [] chars = imya.toCharArray();
+		int j = 0;
+		for (int i = 0; i < chars.length; i++){
+			j = j + Integer.valueOf(chars[i]);
+		}
+		return j;
+	}
 }

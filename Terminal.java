@@ -3,6 +3,7 @@ package lab34;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
@@ -13,13 +14,14 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
+import java.util.NoSuchElementException;
 import com.google.gson.Gson;
-//import com.google.gson.JsonParser;
+import java.util.Date;
+
 
 public class Terminal{
+    Date date = new Date();
 	LinkedList<Vneshnost> maski= new LinkedList<>();
-	//Gson gson = new Gson();
 
 	public Terminal (LinkedList<Vneshnost> abc){
 		maski.addAll(abc);
@@ -27,7 +29,6 @@ public class Terminal{
 	
 
 	public void commander(){
-		//read(path);
 		System.out.println("Start");
 		Scanner command = new Scanner (System.in);
 		String[] cmd = new String[10];
@@ -36,7 +37,6 @@ public class Terminal{
 			System.out.println("Enter command:");
 			if (command.hasNextLine()){cmd = command.nextLine().split(" ");}
 			if (cmd.length==0) {throw new ArrayIndexOutOfBoundsException(); }
-            //else {System.out.println("You don't enter a command. Retry!");}
             try{
             	switch (cmd[0]){
             		/**
@@ -48,17 +48,36 @@ public class Terminal{
             		*/
             		case("clear"): {maski.clear();break;}
             		/**
-            		*
+            		*add element in collection
             		*/
-            		//case("add"): {maski.add(gson.fromJson(cmd[1], lab34.Vneshnost.class));break;}
                     case("add"): {maski.add(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
-
+                    /**
+                    *remove element
+                    */
+                    case("remove"): {rem(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
+                    /**
+                    *ПАСХАЛОЧКА
+                    */
                     case("music"): {music();break;}
+                    /**
+                    *show all elements
+                    */
+                    case("show"): {System.out.println(maski);break;}
+                    /**
+                    *remove last object in collection
+                    */
+                    case("remove_last"):{remover() /*removeLast()*/;break;}
+                    /**
+                    *delete all lower objects
+                    */
+                    case("remove_lower"):{remlow(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
             	}
             }
+            catch(NoSuchElementException ex){
+                System.out.println("коллекция пустая или нет нужного элемента");
+            }
             catch(Exception e){
-            	System.out.println("vse ploho");
-                e.printStackTrace();
+            	System.out.println("ОШИБКА! Введите команду заново");
             }
 		}
 	}
@@ -66,12 +85,9 @@ public class Terminal{
     {
         System.out.println("Type: Maski");
         System.out.println(maski);
-        //System.out.println("Date:" + data);
+        System.out.println("Date:" + date);
         System.out.println("Size:" + maski.size());
     }
-
-
-
 
 
     public void save(String path) throws FileNotFoundException{
@@ -82,6 +98,33 @@ public class Terminal{
     		pw.println("<Vneshnost>" + vnes.getname() + "</Vneshnost>");
     	}
     	pw.flush();
+    }
+
+    public void remover() throws NoSuchElementException{
+        this.maski.removeLast();
+    }
+
+    public void rem(Vneshnost opa){
+        LinkedList<Vneshnost> abc = new LinkedList<Vneshnost>();
+        abc.addAll(maski);
+        maski.clear();
+        for (Vneshnost vnes : abc){
+            if(!vnes.imya.equals(opa.imya)){
+                maski.add(vnes);
+            }
+        }
+    }
+
+    public void remlow(Vneshnost opa){
+        LinkedList<Vneshnost> abc = new LinkedList<Vneshnost>();
+        abc.addAll(maski);
+        maski.clear();
+        for (Vneshnost vnes : abc){
+            if(!vnes.imya.equals(opa.imya)){
+                maski.add(vnes);
+            }
+            else{break;}
+        }
     }
 
     public void music() throws IOException{
