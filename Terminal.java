@@ -10,11 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.File;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
+//import com.google.gson.JsonParser;
 
 public class Terminal{
 	LinkedList<Vneshnost> maski= new LinkedList<>();
-	Gson gson = new Gson();
+	//Gson gson = new Gson();
 
 	public Terminal (LinkedList<Vneshnost> abc){
 		maski.addAll(abc);
@@ -45,11 +45,13 @@ public class Terminal{
             		/**
             		*
             		*/
-            		case("add"): {maski.add(gson.fromJson(cmd[1], Vneshnost.class));break;}
+            		//case("add"): {maski.add(gson.fromJson(cmd[1], lab34.Vneshnost.class));break;}
+                    case("add"): {maski.add(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
             	}
             }
             catch(Exception e){
             	System.out.println("vse ploho");
+                e.printStackTrace();
             }
 		}
 	}
