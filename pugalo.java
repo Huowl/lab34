@@ -14,15 +14,6 @@ public class pugalo extends Something implements kolichestvo{
 	}
 
 	public String typeOfMaterial;
-	//public String imya;
-	
-
-
-
-	//public void givename(String imya) throws IsItExistException{
-	//public pugalo(String imya){
-	//	this.imya = imya;
-	//}
 
 
 	public void givename(String imya) throws IsItExistException{
@@ -32,8 +23,6 @@ public class pugalo extends Something implements kolichestvo{
 			throw new IsItExistException("вы ввели не чучело");
 		}
 	}
-
-
 
 
 	@Override 
