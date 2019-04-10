@@ -46,15 +46,15 @@ public class Terminal{
             		/**
             		*clear
             		*/
-            		case("clear"): {maski.clear();break;}
+            		case("clear"): {maski.clear();save("lab34/anime.xml");break;}
             		/**
             		*add element in collection
             		*/
-                    case("add"): {maski.add(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
+                    case("add"): {maski.add(new Gson().fromJson(cmd[1], Vneshnost.class));save("lab34/anime.xml");break;}
                     /**
                     *remove element
                     */
-                    case("remove"): {rem(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
+                    case("remove"): {rem(new Gson().fromJson(cmd[1], Vneshnost.class));save("lab34/anime.xml");break;}
                     /**
                     *ПАСХАЛОЧКА
                     */
@@ -66,11 +66,11 @@ public class Terminal{
                     /**
                     *remove last object in collection
                     */
-                    case("remove_last"):{remover() /*removeLast()*/;break;}
+                    case("remove_last"):{remover() /*removeLast()*/;save("lab34/anime.xml");break;}
                     /**
                     *delete all lower objects
                     */
-                    case("remove_lower"):{remlow(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
+                    case("remove_lower"):{remlow(new Gson().fromJson(cmd[1], Vneshnost.class));save("lab34/anime.xml");break;}
             	}
             }
             catch(NoSuchElementException ex){
