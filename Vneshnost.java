@@ -1,6 +1,6 @@
 package lab34;
 
-public class Vneshnost extends Something implements material{
+public class Vneshnost extends Something implements material, Comparable<Vneshnost>{
 	public String imya;
 	public Vneshnost(String imya){
 		this.imya = imya;
@@ -58,5 +58,21 @@ public class Vneshnost extends Something implements material{
 			j = j + Integer.valueOf(chars[i]);
 		}
 		return j;
+	}
+	@Override
+	public int compareTo(Vneshnost odin){
+		char [] chars = odin.imya.toCharArray();
+		char [] chars1 = this.imya.toCharArray();
+		int j = 0;
+		int k = 0;
+		for (int i = 0; i < chars.length; i++){
+			j = j + Integer.valueOf(chars[i]);
+		}
+		for (int i = 0; i < chars1.length; i++){
+			k = k + Integer.valueOf(chars1[i]);
+		}
+		if(j > k){return 1;}
+		else if(j < k){return -1;}
+		else {return 0;}
 	}
 }

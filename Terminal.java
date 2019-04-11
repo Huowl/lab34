@@ -17,6 +17,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.util.NoSuchElementException;
 import com.google.gson.Gson;
 import java.util.Date;
+import java.util.Collections;
 
 
 public class Terminal{
@@ -32,17 +33,19 @@ public class Terminal{
 		System.out.println("Start");
 		Scanner command = new Scanner (System.in);
 		String[] cmd = new String[10];
+        String[] cmdr = new String[10];
 		cmd[0] = "";
+        cmdr = cmd;
 		while(!cmd[0].equals("close")){
 			System.out.println("Enter command:");
 			if (command.hasNextLine()){cmd = command.nextLine().split(" ");}
-			if (cmd.length==0) {throw new ArrayIndexOutOfBoundsException(); }
+			if (cmd.length==0) {cmd=cmdr;}
             try{
             	switch (cmd[0]){
             		/**
             		*output to the standard output stream information about the collection (type, initialization date, number of elements, etc.)
             		*/
-            		case("info"): {info();break;}
+            		case("info"): {Collections.sort(this.maski);info();break;}
             		/**
             		*clear
             		*/
@@ -62,7 +65,7 @@ public class Terminal{
                     /**
                     *show all elements
                     */
-                    case("show"): {System.out.println(maski);break;}
+                    case("show"): {Collections.sort(this.maski);System.out.println(maski);break;}
                     /**
                     *remove last object in collection
                     */
@@ -76,8 +79,10 @@ public class Terminal{
             catch(NoSuchElementException ex){
                 System.out.println("коллекция пустая или нет нужного элемента");
             }
+            catch (ArrayIndexOutOfBoundsException exex){System.out.println("пробелы - это плохо");}
             catch(Exception e){
             	System.out.println("ОШИБКА! Введите команду заново");
+e.printStackTrace();
             }
 		}
 	}

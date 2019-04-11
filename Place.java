@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+//import java.util.Collections;
 
 class Place{
 	public static void main(String [] args) throws IOException{
@@ -61,6 +62,7 @@ class Place{
 			System.out.println(e.getMessage());
 		}
 
+		//Collections.sort(maski);
 		Terminal terminal = new Terminal(maski);
 		terminal.commander();
 		terminal.save("lab34/anime.xml");
