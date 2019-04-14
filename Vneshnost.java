@@ -1,11 +1,16 @@
 package lab34;
 
+//import java.util.Date;
+
 public class Vneshnost extends Something implements material, Comparable<Vneshnost>{
 	public String imya;
-	public Vneshnost(String imya){
+	public int prost;
+	public Vneshnost(String imya, int prost){
 		this.imya = imya;
+		this.prost = prost;
 	}
 	public String getname(){return imya;}
+	public int getint(){return prost;}
 	public static String Material(){
 		return "материальный(ые) ";
 	}

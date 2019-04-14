@@ -3,33 +3,40 @@ import java.util.LinkedList;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.File;
 import java.util.Scanner;
 //import java.util.Collections;
 
 class Place{
+	static String svet = System.getenv().get("PROGA");;
 	public static void main(String [] args) throws IOException{
+		//System.out.println(svet);
 		LinkedList<Vneshnost> maski= new LinkedList<>();
 		//чтение файла
 		try{
 			String filename = "lab34/anime.xml";
-			Path path = Paths.get(filename);
-			Scanner scan = new Scanner(path);
-			while(scan.hasNext()){
-				String line = scan.nextLine();
-				if(line.contains("<Vneshnost>")){
-					String imya = line.substring(line.indexOf(">") + 1, line.indexOf("/") - 1);
-					maski.add(new Vneshnost(imya));
+			if(new File(filename).canRead()){
+				Path path = Paths.get(filename);
+				Scanner scan = new Scanner(path);
+				while(scan.hasNext()){
+					String line = scan.nextLine();
+					if(line.contains("<Vneshnost ")){
+						String imya = line.substring(line.indexOf("=") + 2, line.lastIndexOf(" ") - 1);
+						int prost = Integer.parseInt(line.substring(line.lastIndexOf("=") + 2, line.length() - 3));
+						maski.add(new Vneshnost(imya, prost));
+					}
 				}
 			}
+			else{System.out.println("Дайте права для чтения файла");}
 		}
 		catch(IOException e){
-			System.out.println("не найден файл или");
+			System.out.println("не найден файл");
 		}
 
 
 
 		dom();
-		Vneshnost grim = new Vneshnost("lol");
+		Vneshnost grim = new Vneshnost("lol", 1488);
 		try{
 			grim.vesh_v_vetrine("грим");
 		} catch(IsItCorrectException e){
@@ -44,7 +51,7 @@ class Place{
 		grim.vesh_v_vetrine("накладные бороды и усы");
 
 		grim.maska();
-		Vneshnost prorez = new Vneshnost("ph");
+		Vneshnost prorez = new Vneshnost("ph", 228);
 		Vneshnost.maska_type2 type2 = prorez.new maska_type2("маска с прорезами для глаз");
 		Vneshnost.maska_type type = new Vneshnost.maska_type("маска цельная");
 
@@ -65,7 +72,7 @@ class Place{
 		//Collections.sort(maski);
 		Terminal terminal = new Terminal(maski);
 		terminal.commander();
-		terminal.save("lab34/anime.xml");
+		terminal.save(svet);
 	}
 	static void dom(){
 		//здесь лежит анонимный класс и 3 часа работы

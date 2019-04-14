@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Vneshnost>DISCO</Vneshnost>
-<Vneshnost>chocolateDisco</Vneshnost>
-<Vneshnost>MyFunnyValentine</Vneshnost>
-<Vneshnost>Queen</Vneshnost>
-<Vneshnost>killerQueen</Vneshnost>
-<Vneshnost>earth</Vneshnost>
-<Vneshnost>wind</Vneshnost>
-<Vneshnost>and</Vneshnost>
-<Vneshnost>fire</Vneshnost>
-<Vneshnost>chiliPappers</Vneshnost>
-<Vneshnost>heavensdoor</Vneshnost>
-<Vneshnost>badcompany</Vneshnost>
-<Vneshnost>boyztwomen</Vneshnost>
-<Vneshnost>pinkFloyd</Vneshnost>
-<Vneshnost>arnoldLayne</Vneshnost>
-<Vneshnost>roxanne</Vneshnost>
-<Vneshnost>thepolice</Vneshnost>
-<Vneshnost>speedking</Vneshnost>
-<Vneshnost>crazyDiamond</Vneshnost>
+<Vneshnost>
+<Vneshnost imya="null" prost="0"/>
+<Vneshnost imya="acdc" prost="1"/>
+<Vneshnost imya="asd" prost="12"/>
+</Vneshnost>

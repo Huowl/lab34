@@ -34,6 +34,17 @@ public class Terminal{
 		Scanner command = new Scanner (System.in);
 		String[] cmd = new String[10];
         String[] cmdr = new String[10];
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run(){
+                try{
+                    save(Place.svet);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+
+        });
 		cmd[0] = "";
         cmdr = cmd;
 		while(!cmd[0].equals("close")){
@@ -49,15 +60,24 @@ public class Terminal{
             		/**
             		*clear
             		*/
-            		case("clear"): {maski.clear();save("lab34/anime.xml");break;}
+            		case("clear"): {maski.clear();break;}
             		/**
             		*add element in collection
             		*/
-                    case("add"): {maski.add(new Gson().fromJson(cmd[1], Vneshnost.class));save("lab34/anime.xml");break;}
+                    case("add"): {
+                        if (!cmd[1].equals("{}")){
+                            maski.add(new Gson().fromJson(cmd[1], Vneshnost.class));break;
+                        }
+                        else {System.out.println("отсутствуют данные!");break;}
+                    }
                     /**
                     *remove element
                     */
-                    case("remove"): {rem(new Gson().fromJson(cmd[1], Vneshnost.class));save("lab34/anime.xml");break;}
+                    case("remove"): {
+                        if (!cmd[1].equals("{}")){
+                            rem(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
+                        else {System.out.println("отсутствуют данные!");}
+                    }
                     /**
                     *ПАСХАЛОЧКА
                     */
@@ -69,11 +89,17 @@ public class Terminal{
                     /**
                     *remove last object in collection
                     */
-                    case("remove_last"):{remover() /*removeLast()*/;save("lab34/anime.xml");break;}
+                    case("remove_last"):{remover();break;}
                     /**
                     *delete all lower objects
                     */
-                    case("remove_lower"):{remlow(new Gson().fromJson(cmd[1], Vneshnost.class));save("lab34/anime.xml");break;}
+                    case("remove_lower"):{
+                        if (!cmd[1].equals("{}")){
+                            remlow(new Gson().fromJson(cmd[1], Vneshnost.class));break;}
+                        else {System.out.println("отсутствуют данные!");}
+                    }
+                    case("close"):{break;}
+                    default: {System.out.println("Мы не знаем такую команду(");}
             	}
             }
             catch(NoSuchElementException ex){
@@ -82,7 +108,6 @@ public class Terminal{
             catch (ArrayIndexOutOfBoundsException exex){System.out.println("пробелы - это плохо");}
             catch(Exception e){
             	System.out.println("ОШИБКА! Введите команду заново");
-e.printStackTrace();
             }
 		}
 	}
@@ -97,12 +122,17 @@ e.printStackTrace();
 
     public void save(String path) throws FileNotFoundException{
     	File file = new File(path);
-    	PrintWriter pw = new PrintWriter(file);
-    	pw.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-    	for (Vneshnost vnes : maski){
-    		pw.println("<Vneshnost>" + vnes.getname() + "</Vneshnost>");
-    	}
-    	pw.flush();
+        if (file.canWrite()){
+        	PrintWriter pw = new PrintWriter(file);
+    	   pw.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+           pw.println("<Vneshnost>");
+    	   for (Vneshnost vnes : maski){
+    	       pw.println("<Vneshnost imya=\"" + vnes.getname() + "\" prost=\"" + vnes.getint() + "\"/>");
+    	   }
+           pw.println("</Vneshnost>");
+    	   pw.flush();
+        }
+        else{System.out.println("Дайте права для чтения файла");}
     }
 
     public void remover() throws NoSuchElementException{
