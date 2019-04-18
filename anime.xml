@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Vneshnost>
+<Vneshnost imya="disco" prost="1904"/>
 <Vneshnost imya="null" prost="0"/>
 <Vneshnost imya="acdc" prost="1"/>
 <Vneshnost imya="asd" prost="12"/>

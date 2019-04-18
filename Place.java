@@ -14,7 +14,7 @@ class Place{
 		LinkedList<Vneshnost> maski= new LinkedList<>();
 		//чтение файла
 		try{
-			String filename = "lab34/anime.xml";
+			String filename = svet;
 			if(new File(filename).canRead()){
 				Path path = Paths.get(filename);
 				Scanner scan = new Scanner(path);
